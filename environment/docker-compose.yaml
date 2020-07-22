@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: resilva87/docker-rabbitmq-stomp
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_NODE_TYPE=stats
+      - RABBITMQ_NODE_NAME=rabbit@stats
+      - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+      - RABBITMQ_PLUGINS=rabbit_stomp
+    ports:
+      - '15672:15672'
+      - '61613:61613'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  chat:
+    build:
+      context: ../
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    ports:
+      - '8080:8080'
