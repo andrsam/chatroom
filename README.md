@@ -18,7 +18,8 @@ The simple chatting application
 
 #### Run and build 
 using command:
+
 ```
-docker-compose -f docker-compose.yaml up --build 
+docker-compose -f /enviroment/docker-compose.yaml up --build 
 ```
 
