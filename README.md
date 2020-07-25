@@ -20,6 +20,7 @@ The simple chatting application
 using command:
 
 ```
-docker-compose -f /enviroment/docker-compose.yaml up --build 
+cd environment 
+docker-compose -f docker-compose.yaml up --build 
 ```
 
